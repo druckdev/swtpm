@@ -186,6 +186,14 @@ AC_CHECK_LIB(tpms,
              TPMLIB_ChooseTPMVersion,[true],
              AC_MSG_ERROR("libtpms 0.6 or later is required")
 )
+AC_CHECK_LIB(tpms,
+             [TPMLIB_SetProfile],
+             [AC_DEFINE_UNQUOTED([HAVE_LIBTPMS_SETPROFILE_API], 1,
+                                 [whether TPMLIB_SetProfile API is available])
+              libtpms_has_setprofile="yes"],
+             [libtpms_has_setprofile="no"]
+)
+
 AC_SUBST([LIBTPMS_LIBS])
 
 AC_CHECK_LIB(c, clock_gettime, LIBRT_LIBS="", LIBRT_LIBS="-lrt")
@@ -626,7 +634,8 @@ printf "with_chardev    : %5s  (no = no chardev interface)\n" $with_chardev
 printf "with_vtpm_proxy : %5s  (no = no vtpm proxy support; Linux only)\n" $with_vtpm_proxy
 printf "with_seccomp    : %5s  (no = no seccomp profile; Linux only)\n" $with_seccomp
 printf "\n"
-printf "active PCR banks  : %s\n" $DEFAULT_PCR_BANKS
+printf "active PCR banks      : %s\n" $DEFAULT_PCR_BANKS
+printf "TPM 2 profile support : %s\n" $libtpms_has_setprofile
 echo
 echo "Version to build  : $PACKAGE_VERSION"
 echo "Crypto library    : $cryptolib"
