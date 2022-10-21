@@ -37,7 +37,7 @@ man8_MANS = \
 	$(man8_static_MANS)
 
 %.8 : %.pod
-	@pod2man -r "swtpm" \
+	@/usr/bin/core_perl/pod2man -r "swtpm" \
 		-c "" \
 		-n $(basename $@) \
 		--section=8 $< > $@

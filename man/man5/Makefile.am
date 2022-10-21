@@ -16,7 +16,7 @@ man5_MANS = \
 	swtpm-localca.conf.5
 
 %.5 : %.pod
-	@pod2man -r "swtpm" \
+	@/usr/bin/core_perl/pod2man -r "swtpm" \
 		-c "" \
 		-n $(basename $@) \
 		--section=5 $< > $@

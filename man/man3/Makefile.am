@@ -12,7 +12,7 @@ man3_MANS = \
 	swtpm_ioctls.3
 
 %.3 : %.pod
-	@pod2man -r "swtpm" \
+	@/usr/bin/core_perl/pod2man -r "swtpm" \
 		-c "" \
 		-n $(basename $@) \
 		--section=3 $< > $@
